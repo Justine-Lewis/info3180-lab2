@@ -1,5 +1,8 @@
 from app import app
 from flask import render_template, request, redirect, url_for, flash
+import datetime
+
+
 
 
 ###
@@ -46,6 +49,27 @@ def page_not_found(error):
     """Custom 404 page."""
     return render_template('404.html'), 404
 
+
+def format_date_joined(date_obj):
+    return date_obj.strftime("%b, %Y")
+
+
 @app.route('/profile')
 def profile():
- return render_template('profile.html') 
+    date_joined = datetime.date(2026, 2, 15)
+
+    
+    joined_date = format_date_joined(date_joined)
+
+    return render_template(
+        'profile.html',
+        full_name="Justine Lewis",
+        username="justine",
+        location="Kingston, Jamaica",
+        bio="I love music and film so much!!! thats it",
+        posts=58,
+        followers=1000000,
+        following=2,
+        joined=joined_date
+    )
+
